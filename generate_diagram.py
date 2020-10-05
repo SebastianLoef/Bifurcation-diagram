@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+    This generates a bifurcation diagram using the logistic map. The bifurcation
+    diagram made to be purely asthetic. Don't expect anything else.
+"""
 import argparse
 import cv2
 import numpy as np
@@ -36,28 +40,29 @@ def generate_diagram(bg, color, blur=False):
 
     if blur:
         img = cv2.blur(img, (blur, blur))
-    cv2.imwrite('img.png', img)
+    cv2.imwrite("img.png", img)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--bg", default=None,
+    parser.add_argument("--bg", default=None, type=str,
                         help="You can set an image as background to"
                         +    "the diagram. \nNote that this will disable"
                         +    "other background options")
-    parser.add_argument("--bg_color", default=BG_COLOR,
+    parser.add_argument("--bg_color", default=BG_COLOR, type=int, nargs="+",
                         help="Set a static background color")
-    parser.add_argument("--bg_noise",  default=False,
+    parser.add_argument("--bg_noise",  default=False, type=str,
                         help="Adds gaussian noise to the background")
-    parser.add_argument("--diagram_color", default=DIAGRAM_COLOR,
+    parser.add_argument("--diagram_color", default=DIAGRAM_COLOR, type=int,
+                        nargs="+",
                         help="Change the color of the diagram")
-    parser.add_argument("--width", default=WIDTH,
+    parser.add_argument("--width", default=WIDTH, type=int,
                         help="Set width, this will be overwritten"
                         +    "by --bg option if set")
-    parser.add_argument("--height", default=HEIGHT,
+    parser.add_argument("--height", default=HEIGHT, type=int,
                         help="Set height, this will be overwritten"
                         +    "by --bg option if set")
-    parser.add_argument("--blur", default=3,
+    parser.add_argument("--blur", default=3, type=float,
                         help="Might make the picture look better.")
 
     args = parser.parse_args()
